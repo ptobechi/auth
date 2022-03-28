@@ -19,14 +19,3 @@ const connectDB = async () => {
 
 module.exports = connectDB
 
-// /connect to DB
-// mongoose.connect(process.env.DB, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-// }).then(() => {
-//     console.log("DB connected");
-// }).catch((err) => {
-//     // console.log("Unable to connect to DB")
-//     console.log(`Unable to connect to DB: ${err} `);
-//     process.exit(1)
-// });
