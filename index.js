@@ -3,12 +3,19 @@ const app = express();
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const path = require("path");
+const bodyParser = require("body-parser");
 
 dotenv.config();
 
 //database connection
 const connectDB = require("./servers/services/database/connection");
 connectDB();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded())
+
+// parse application/json
+app.use(bodyParser.json())
 
 //log all http request to the conso9le
 app.use(morgan("tiny")); 
@@ -21,15 +28,11 @@ app.set("view engine", "ejs")
 app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
 app.use('/media', express.static(path.resolve(__dirname, "assets/media")));
 app.use('/plugins', express.static(path.resolve(__dirname, "assets/plugins")));
+app.use('/js', express.static(path.resolve(__dirname, "assets/js")));
 
-//render signup page to client side
-app.get("/", (req, res) => {
-    res.render("signin");
-})
-
-
-
-
+//load application routes for page rendering
+app.use("/", require("./servers/routes/routes"));
+// app.use("/", require("./servers/routes/auth"));
 
 
 //listening port 

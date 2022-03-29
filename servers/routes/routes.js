@@ -2,7 +2,7 @@ const express = require('express');
 const route = express.Router()
 
 const services = require('../services/render/render');
-// const controller = require('../controllers/user');
+const controller = require('../controllers/product');
 
 /**
  *  @description Root Route
@@ -11,23 +11,23 @@ const services = require('../services/render/render');
 route.get('/', services.homeRoutes);
 
 /**
- *  @description add users
- *  @method GET /add-user
+ *  @description create order/box
+ *  @method GET /create_box
  */
-route.get('/add-user', services.add_user)
+route.get('/create_box', services.create_box)
 
 /**
- *  @description for update user
- *  @method GET /update-user
+ *  @description for update order/box
+ *  @method GET /update_box
  */
-route.get('/update-user', services.update_user)
+route.get('/update_box', services.update_box)
 
 
 // API
-// route.post('/api/users', controller.create);
-// route.get('/api/users', controller.find);
-// route.put('/api/users/:id', controller.update);
-// route.delete('/api/users/:id', controller.delete);
+route.post('/api/product', controller.create);
+route.get('/api/product', controller.find);
+route.put('/api/product/:id', controller.update);
+route.delete('/api/product/:id', controller.delete);
 
 
 module.exports = route
