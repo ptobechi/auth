@@ -21,7 +21,7 @@
                     <div class="ms-5">
                         <a class="text-gray-800 text-hover-primary fs-5 fw-bolder">${items.item}</a>
                         <input type='text' value='${items.item}' name='item[]' />
-                        <input type='text' value='${items.price}' name='price[]' />
+                        <input type='text' value='${items.price}' name='item[]' />
                         <div class="fw-bold fs-7">Price: &#8358;
                             <span class="item-price" data-kt-ecommerce-edit-order-filter="price">${items.price}</span>
                         </div>

@@ -21,7 +21,8 @@ exports.create = (req, res) => {
     product
         .save(product)
         .then(data => {
-            res.send(data)
+            // res.send(data)
+            res.redirect("/create_box")
         })
         .catch(err => {
             res.status(500).send({
@@ -41,7 +42,6 @@ exports.find = (req, res)=>{
                 res.status(404).send({message: "Product not found"})
             }else{
                 res.send(product);
-
             }
         })
         .catch(err=>{

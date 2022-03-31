@@ -62,7 +62,8 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Form-->
-            <form id="kt_ecommerce_edit_order_form" class="form d-flex flex-column flex-lg-row" action="create_box" method="POST">
+            <form id="edit_order_form" class="form d-flex flex-column flex-lg-row"  >
+                <input type="hidden" name="id" value="<%= products._id %> ">
                 <!--begin::Aside column-->
                 <div class="w-100 flex-lg-row-auto w-lg-300px mb-7 me-7 me-lg-10">
                     <!--begin::Order details-->
@@ -83,7 +84,7 @@
                                     <label class="required form-label">Box Name</label>
                                     <!--end::Label-->
                                     <!--begin::Select2-->
-                                    <input type="text" class="form-control" name="box_name">
+                                    <input type="text" class="form-control" name="box_name" value="<%= products.box %> ">
                                     <!--end::Select2-->
                                 </div>
                                 <!--end::Input group-->
@@ -93,7 +94,7 @@
                                     <label class="required form-label">Box Description</label>
                                     <!--end::Label-->
                                     <!--begin::Select2-->
-                                    <input type="text" class="form-control" name="box_description" >
+                                    <input type="text" class="form-control" name="box_description" value="<%= products.description %> " >
                                     <!--end::Select2-->
                                 </div>
                                 <!--end::Input group-->
@@ -158,8 +159,8 @@
                                     <!--begin::Selected products-->
                                     <!--begin::Total price-->
                                     <div class="fw-bolder fs-4">Total Cost:  &#8358;
-                                        <span id="kt_ecommerce_edit_order_total_price">0.00</span>
-                                        <input type="text" id="total_price" name="total_price">
+                                        <span id="kt_ecommerce_edit_order_total_price"><%= products.total_sum %> </span>
+                                        <input type="hidden" id="total_price" name="total_price" value="<%= products.total_sum %> ">
                                     </div>
                                     <!--end::Total price-->
                                 </div>
