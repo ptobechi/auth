@@ -1,6 +1,34 @@
 const Product = require("../models/Product");
+const Box = require("../models/Box");
 
 //create order/box
+exports.upload = (req, res) => {
+    //validate request
+    if(!req.body){
+        res.status(400).send({message: "Content can not be empty"});
+        return;
+    }
+
+    //new product
+    const product = new Product({
+        name: req.body.product,
+    })
+
+    //save product to database
+    product
+        .save(product)
+        .then(data => {
+            // res.send(data)
+            // alert("Product uploaded successfully")
+            res.redirect("/admin")
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:err.message || "Some error occured while creating a create operation"
+            })
+        })
+};
+
 exports.create = (req, res) => {
     //validate request
     if(!req.body){
@@ -99,3 +127,13 @@ exports.delete = (req, res)=>{
             res.status(500).send({message: "Could not delete product"})
         })
 };
+
+exports.getProduct = async (req, res) =>{
+    let payload = req.body.payload.trim();
+    let search = await Product.find({name: new RegExp(payload,'i')}).exec();
+    //Limit Seaexh Result to ten
+    search = search.slice(0, 10);
+    res.send({payload: search});
+
+
+}

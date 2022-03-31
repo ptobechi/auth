@@ -1,5 +1,5 @@
 <!-- Start Header section -->
-<%- include("include/_header")%>
+<%- include("../include/_header")%>
 <!-- End header section -->
 
 <!--begin::Content-->
@@ -18,12 +18,16 @@
             <!--begin::Actions-->
             <div class="d-flex align-items-center gap-2 gap-lg-3">
                 <!--begin::Primary button-->
+                <a  class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Upload Products</a>
+                <!--end::Primary button-->
+                <!--begin::Primary button-->
                 <a href="/create_box" class="btn btn-sm btn-primary">Create Box</a>
                 <!--end::Primary button-->
             </div>
             <!--end::Actions-->
         </div>
         <!--end::Container-->
+
     </div>
     <!--end::Toolbar-->
     <!--begin::Post-->
@@ -56,7 +60,7 @@
                             <!--begin::Toolbar-->
                             <div class="card-toolbar pt-5">
                                 <!--begin::Menu-->
-                                <button class="btn btn-sm btn-icon btn-active-color-primary btn-color-black bg-black bg-opacity-25 bg-hover-opacity-100 bg-hover-black bg-active-opacity-25 w-20px h-20px" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-overflow="true">
+                                <button class="btn btn-sm btn-icon btn-active-color-primary btn-color-black bg-white bg-opacity-25 bg-hover-opacity-100 bg-hover-black bg-active-opacity-25 w-20px h-20px" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-overflow="true">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen052.svg-->
                                     <span class="svg-icon svg-icon-4">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -219,7 +223,7 @@
                                 <!--end::Table head-->
                                 <!--begin::Table body-->
                                 <tbody>
-                                    <%- include("include/_show")%>
+                                    <%- include("../include/_show")%>
                                 </tbody>
                                 <!--end::Table body-->
                             </table>
@@ -279,5 +283,5 @@
 
 
 <!-- Start Header section -->
-<%- include("include/_footer")%>
+<%- include("../include/_footer")%>
 <!-- End header section -->

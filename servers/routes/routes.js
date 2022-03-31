@@ -11,6 +11,12 @@ const controller = require('../controllers/product');
 route.get('/', services.homeRoutes);
 
 /**
+ *  @description Admin Page Route
+ *  @method GET /
+ */
+//  route.get('/admin', services.adminRoutes);
+
+/**
  *  @description create order/box
  *  @method GET /create_box
  */
@@ -24,6 +30,8 @@ route.get('/update_box', services.update_box)
 
 
 // API
+route.post('/getProducts', controller.getProduct);
+route.post('/api/upload/product', controller.upload);
 route.post('/api/product', controller.create);
 route.get('/api/product', controller.find);
 route.put('/api/product/:id', controller.update);
