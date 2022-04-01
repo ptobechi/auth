@@ -66,11 +66,11 @@ $("*#box_details").on('click', function(){
 });
 
 function sendData(e){
-    const searchResult = document.getElementById("productSearchResult");
+    let searchResult = document.getElementById("productSearchResult");
     let match = e.value.match(/^[a-zA-Z]*/);
     let match2 = e.value.match(/\s*/);
     if(match2[0] === e.value){
-        searchResult.innerHtml = 'okar';
+        searchResult.innerHtml = '';
         return;
     }
     if(match[0] === e.value){
@@ -83,24 +83,24 @@ function sendData(e){
             searchResult.innerHtml = '';
             if(payload.length < 1){
                 // searchResult.innerHtml = "<p>Result not found.</p>";
-                searchResult.innerHtml = "Result not found.";
+                searchResult.innerHTML += "Result not found.";
                 return;
             }
             payload.forEach((item, index) => {
                 // if(index > 0) searchResult.innerHtml +='<hr>';
-                // searchResult.innerHtml += `<p>${item.name}</p>`;
-                if(index > 0){
-                    searchResult.innerHtml +='<hr>';
-                    console.log(item.name)
-                }else{
-                    searchResult.innerHtml += `<p>${item.name}</p>`;
-                    console.log(item.name)
-                }
+                searchResult.innerHtml += `${item.name}`;
+                // if(index > 0){
+                //     searchResult.innerHtml +='<hr>';
+                //     console.log(item.name)
+                // }else{
+                //     searchResult.innerHtml += `<p>${item.name}</p>`;
+                //     console.log(item.name)
+                // }
             });
             return;
         });
         return;
     }
-    searchResult.innerHtml = '';
+    // searchResult.innerHtml = 'Food';
     
 }

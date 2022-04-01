@@ -20,7 +20,7 @@ exports.upload = (req, res) => {
         .then(data => {
             // res.send(data)
             // alert("Product uploaded successfully")
-            res.redirect("/admin")
+            res.redirect("/")
         })
         .catch(err => {
             res.status(500).send({
@@ -36,18 +36,29 @@ exports.create = (req, res) => {
         return;
     }
 
+    const box = req.body.box_name;
+    const description = req.body.box_description;
+    const total_sum = req.body.total_price;
+    const items = req.body.item;
+    const prices = req.body.price;
+    const items_list = [];
+
+    //Set Box
+    for(let i =0; i <= items.length; i++){
+        items_list.push({"item":items[i], "price":prices[i]});
+    }
+
     //new product
-    const product = new Product({
-        box: req.body.box_name,
-        description: req.body.box_description,
-        items: req.body.item,
-        // price: req.body.price,
-        total_sum: req.body.total_price
+    const itemBox = new Box({
+        box: box,
+        description: description,
+        items: items_list,
+        total_sum: total_sum
     })
 
     //save product to database
-    product
-        .save(product)
+    itemBox
+        .save(itemBox)
         .then(data => {
             // res.send(data)
             res.redirect("/create_box")
@@ -64,12 +75,12 @@ exports.find = (req, res)=>{
 
     if(req.query.id){
         const id = req.query.id;
-        Product.findById(id)
-        .then(product => {
-            if(!product){
+        Box.findById(id)
+        .then(itemBox => {
+            if(!itemBox){
                 res.status(404).send({message: "Product not found"})
             }else{
-                res.send(product);
+                res.send(itemBox);
             }
         })
         .catch(err=>{
@@ -78,9 +89,9 @@ exports.find = (req, res)=>{
 
 
     }else{
-        Product.find()
-        .then(product => {
-            res.send(product);
+        Box.find()
+        .then(itemBox => {
+            res.send(itemBox);
         })
         .catch(err=>{
             res.status(500).send({message: err.message || "An Error occured retriving products"})
@@ -114,7 +125,7 @@ exports.update = (req, res)=>{
 //delete products
 exports.delete = (req, res)=>{
     const id = req.params.id;
-    Product.findByIdAndDelete(id)
+    Box.findByIdAndDelete(id)
         .then(data => {
             if(!data){
                 res.status(404).send({message: `Cannot delete product with ${id}. This is not a valid ID`})

@@ -19,9 +19,8 @@
             <td>
                 <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_30">
                     <div class="ms-5">
-                        <a class="text-gray-800 text-hover-primary fs-5 fw-bolder">${items.item}</a>
-                        <input type='text' value='${items.item}' name='item[]' />
-                        <input type='text' value='${items.price}' name='item[]' />
+                        <a class="text-gray-800 text-hover-primary fs-5 fw-bolder">${items.item.toUpperCase()}</a>
+                        <input type='hidden' value='${items.item}' name='item[]' />
                         <div class="fw-bold fs-7">Price: &#8358;
                             <span class="item-price" data-kt-ecommerce-edit-order-filter="price">${items.price}</span>
                         </div>
@@ -29,6 +28,8 @@
                 </div>
             </td>
             <td class="text-end pe-5" data-order="22">
+            Price: &#8358;
+                <input type='text' value='${items.price}' name='price[]' />
                 <span class="fw-bolder text-danger ms-3">Remove</span>
             </td>
         </tr>

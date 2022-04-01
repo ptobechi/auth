@@ -159,8 +159,8 @@
                                     <!--begin::Selected products-->
                                     <!--begin::Total price-->
                                     <div class="fw-bolder fs-4">Total Cost:  &#8358;
-                                        <span id="kt_ecommerce_edit_order_total_price"><%= products.total_sum %> </span>
-                                        <input type="hidden" id="total_price" name="total_price" value="<%= products.total_sum %> ">
+                                        <span id="kt_ecommerce_edit_order_total_price"><%= products.items %> </span>
+                                        <input type="text" id="total_price" name="total_price" value="<%= products.items %> ">
                                     </div>
                                     <!--end::Total price-->
                                 </div>
@@ -181,6 +181,27 @@
 
                                     <!--begin::Table body-->
                                     <tbody class="fw-bold text-gray-600" id="cart">
+                                        <% for(var i=0; i<products.items.length; i++){ %>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_30">
+                                                        <div class="ms-5">
+                                                            <a class="text-gray-800 text-hover-primary fs-5 fw-bolder"><%= products.items[i].toUpperCase() %></a>
+                                                            <!-- <input type='hidden' value='${items.item}' name='item[]' /> -->
+                                                            <div class="fw-bold fs-7">Price: &#8358;
+                                                                <span class="item-price" data-kt-ecommerce-edit-order-filter="price"><%= products.price[i] %></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-end pe-5" data-order="22">
+                                                Price: &#8358;
+                                                    <input type='text' value='${items.price}' name='price[]' />
+                                                    <span class="fw-bolder text-danger ms-3">Remove</span>
+                                                </td>
+                                            </tr>
+
+                                        <% } %>
                                         <!--begin::Table row-->
                                         <tr id="total_price_container"></tr>
                                         <!--end::Table row-->
