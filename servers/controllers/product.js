@@ -20,7 +20,7 @@ exports.upload = (req, res) => {
         .then(data => {
             // res.send(data)
             // alert("Product uploaded successfully")
-            res.redirect("/")
+            res.redirect("/admin")
         })
         .catch(err => {
             res.status(500).send({
@@ -44,7 +44,7 @@ exports.create = (req, res) => {
     const items_list = [];
 
     //Set Box
-    for(let i =0; i <= items.length; i++){
+    for(let i =0; i < items.length; i++){
         items_list.push({"item":items[i], "price":prices[i]});
     }
 
@@ -61,7 +61,7 @@ exports.create = (req, res) => {
         .save(itemBox)
         .then(data => {
             // res.send(data)
-            res.redirect("/create_box")
+            res.redirect("/admin")
         })
         .catch(err => {
             res.status(500).send({
@@ -108,7 +108,9 @@ exports.update = (req, res)=>{
     }
 
     const id = req.params.id;
-    Product.findByIdAndUpdate(id, req.body, {useFindAndModify:false})
+    console.log(req.body)
+
+    Box.findByIdAndUpdate(id, req.body, {useFindAndModify:false})
         .then(data => {
             if(!data){
                 res.status(404).send({message: `Cannot update product with ${id}. This is not a valid ID`})

@@ -1,21 +1,37 @@
-// $("#kt_ecommerce_edit_order_form").submit(function(event){
-//     alert("Product Uploaded");
-// });
+$("#kt_ecommerce_edit_order_form").submit(function(event){
+    alert("Product Uploaded");
+});
+
+// alert("Okay")
 
 $("#edit_order_form").submit(function(event){
     event.preventDefault();
 
-    let array = $(this).serializeArray();
-    let data = {}
+    let box_id = document.getElementById("box_id").value;
+    let box = document.getElementById("box_name").value;
+    let description = document.getElementById("box_description").value;
+    let total_sum = document.getElementById("total_price").value;
+    let items = document.getElementsByClassName("box_items");
+    let itemsPrice = document.getElementsByClassName("box_items_price");
+    let itemList = []
 
-    $.map(array, function(n,i){
-        data[n["name"]] = n["value"]
-    })
+    for(i=0; i < items.length; i++){
+        itemList.push({"item":items[i].value, "price":itemsPrice[i].value})
+    }
 
-    console.log(data);
+    let data = 
+        {
+            "box": box,
+            "description": description,
+            "items": itemList,
+            "total_sum": total_sum
+        }
     
+    // data.item
+    console.log(data);
+   
     let request = {
-        "url": `http://localhost:3000/api/product/${data.id}`,
+        "url": `/api/product/${data.id}`,
         "method": "PUT",
         "data": data
     }
@@ -25,7 +41,7 @@ $("#edit_order_form").submit(function(event){
     })
 });
 
-if(window.location.pathname == "/"){
+if(window.location.pathname == "/admin"){
     $ondelete = $(".table tbody td a.delete");
     $ondelete.click(function(){
         let id = $(this).attr("data-id")

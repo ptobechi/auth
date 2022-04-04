@@ -1,5 +1,5 @@
 <!-- Start Header section -->
-<%- include("../include/_header")%>
+<%- include("include/_header")%>
 <!-- End header section -->
 
 
@@ -63,7 +63,7 @@
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Form-->
             <form id="edit_order_form" class="form d-flex flex-column flex-lg-row"  >
-                <input type="hidden" name="id" value="<%= products._id %> ">
+                <input type="hidden" id="box_id" name="id" value="<%= products._id %> ">
                 <!--begin::Aside column-->
                 <div class="w-100 flex-lg-row-auto w-lg-300px mb-7 me-7 me-lg-10">
                     <!--begin::Order details-->
@@ -84,7 +84,7 @@
                                     <label class="required form-label">Box Name</label>
                                     <!--end::Label-->
                                     <!--begin::Select2-->
-                                    <input type="text" class="form-control" name="box_name" value="<%= products.box %> ">
+                                    <input type="text" class="form-control" id="box_name" name="box_name" value="<%= products.box %> ">
                                     <!--end::Select2-->
                                 </div>
                                 <!--end::Input group-->
@@ -94,7 +94,7 @@
                                     <label class="required form-label">Box Description</label>
                                     <!--end::Label-->
                                     <!--begin::Select2-->
-                                    <input type="text" class="form-control" name="box_description" value="<%= products.description %> " >
+                                    <input type="text" class="form-control" id="box_description" name="box_description" value="<%= products.description %> " >
                                     <!--end::Select2-->
                                 </div>
                                 <!--end::Input group-->
@@ -186,25 +186,27 @@
                                                 <td>
                                                     <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_30">
                                                         <div class="ms-5">
-                                                            <a class="text-gray-800 text-hover-primary fs-5 fw-bolder"><%= products.items[i] %></a>
+                                                            <a class="text-gray-800 text-hover-primary fs-5 fw-bolder"><%= products.items[i].item %></a>
                                                             <!-- <input type='hidden' value='${items.item}' name='item[]' /> -->
                                                             <div class="fw-bold fs-7">Price: &#8358;
-                                                                <span class="item-price" data-kt-ecommerce-edit-order-filter="price"><%= products.items[i] %></span>
+                                                                <span class="item-price" data-kt-ecommerce-edit-order-filter="price"><%= products.items[i].price %></span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td class="text-end pe-5" data-order="22">
                                                 Price: &#8358;
-                                                    <input type='text' value='<%= products.items[i] %>' name='price[]' />
+                                                <input type='hidden' value='<%= products.items[i].item %>' name='item[]' class="box_items" />
+                                                <input type='text' value='<%= products.items[i].price %>' name='price[]' class="box_items_price" />
                                                     <span class="fw-bolder text-danger ms-3">Remove</span>
                                                 </td>
                                             </tr>
 
-                                        <% } %>
                                         <!--begin::Table row-->
                                         <tr id="total_price_container"></tr>
                                         <!--end::Table row-->
+                                        <% } %>
+
                                     </tbody>
                                     <!--end::Table body-->
                                 </table>
@@ -217,7 +219,7 @@
                     
                     <div class="d-flex justify-content-end">
                         <!--begin::Button-->
-                        <a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_edit_order_cancel" class="btn btn-light me-5">Cancel</a>
+                        <a href="" id="kt_ecommerce_edit_order_cancel" class="btn btn-light me-5">Cancel</a>
                         <!--end::Button-->
                         <!--begin::Button-->
                         <button type="submit" id="kt_ecommerce_edit_order_submit" class="btn btn-primary">
@@ -241,5 +243,5 @@
 
 
 <!-- Start Header section -->
-<%- include("../include/_footer")%>
+<%- include("include/_footer")%>
 <!-- End header section -->

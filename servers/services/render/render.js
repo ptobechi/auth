@@ -23,7 +23,6 @@ exports.adminRoutes = (req, res) => {
 }
 
 exports.create_box = (req, res) =>{
-    
     res.render('admin/create_order');
 }
 
