@@ -108,7 +108,7 @@ exports.update = (req, res)=>{
     }
 
     const id = req.params.id;
-    console.log(req.body)
+    // console.log(req.body)
 
     Box.findByIdAndUpdate(id, req.body, {useFindAndModify:false})
         .then(data => {

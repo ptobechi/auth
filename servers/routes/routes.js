@@ -11,10 +11,16 @@ const controller = require('../controllers/product');
 route.get('/', services.homeRoutes);
 
 /**
+ *  @description Users Route
+ *  @method GET /
+ */
+ route.get('/user', services.userRoutes);
+
+ /**
  *  @description Admin Route
  *  @method GET /
  */
- route.get('/admin', services.adminRoutes);
+  route.get('/admin', services.adminRoutes);
 
 /**
  *  @description Admin Page Route

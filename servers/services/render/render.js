@@ -11,6 +11,16 @@ exports.homeRoutes = (req, res) => {
             res.send(err);
         })
 }
+exports.userRoutes = (req, res) => {
+    //make a get request to product api
+    axios.get("http://localhost:3000/api/product")
+        .then(function(response){
+             res.render('users/', {products: response.data});    
+        })
+        .catch(err => {
+            res.send(err);
+        })
+}
 
 exports.adminRoutes = (req, res) => {
     axios.get("http://localhost:3000/api/product")

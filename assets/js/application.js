@@ -2,8 +2,6 @@ $("#kt_ecommerce_edit_order_form").submit(function(event){
     alert("Product Uploaded");
 });
 
-// alert("Okay")
-
 $("#edit_order_form").submit(function(event){
     event.preventDefault();
 
@@ -31,7 +29,7 @@ $("#edit_order_form").submit(function(event){
     console.log(data);
    
     let request = {
-        "url": `/api/product/${data.id}`,
+        "url": `/api/product/${box_id}`,
         "method": "PUT",
         "data": data
     }
@@ -62,9 +60,9 @@ if(window.location.pathname == "/admin"){
 }
 
 $("*#box_details").on('click', function(){
+    document.getElementById("items_container").innerHTML = "";
     let id = $(this).attr("data-id")
 
-    // console.log(id);
     let request = {
         "url": `http://localhost:3000/api/product?id=${id}`,
         "method": "GET"
@@ -72,13 +70,42 @@ $("*#box_details").on('click', function(){
 
     $.ajax(request).done(function(response){
         console.log(response);
-        response.items.forEach(item => {
-            $("#item_name").text(item);
-        })
-        // $("#item_name").text(response.box);
+        let items = response.items;
+        for(i=0; i<items.length; i++){
+            $("#item_name").text(items[i].price);
+            const itemBox = document.createElement("div");
+            itemBox.innerHTML =`
+                <!--begin::Item-->
+                <div class="d-flex flex-stack">
+                    <div class="d-flex align-items-center me-5">
+                        <div class="me-5">
+                            <a id="item_name${i}" class="text-gray-800 fw-bolder text-hover-primary fs-6">${items[i].item}</a>
+                            <input type="hidden"  id="list${i}" name="items[]" value="${items[i].item}">
+                        </div>
+                    </div>
+                    <div class="text-gray-400 fw-bolder fs-7 text-end">
+                        <input type="number" placeholder="&#8358 ${items[i].price}" value="${items[i].price}" name="price" id="item_price${i}">
+                        <span class="text-danger" onclick="removeItem(this.id)" id="${i}">Remove</span>
+                    </div>
+                </div>
+                <!--end::Item-->
+                
+                <!--begin::Separator-->
+                <div id="dash${id}" class="separator separator-dashed my-5"></div>
+                <!--end::Separator-->
+            </div>
+            `;
+            const cart = document.getElementById("items_container");
+            const total = document.getElementById("items_list");
+            cart.insertBefore(itemBox, total);
+
+        }
+        
         $("#total_sum").text(response.total_sum);
+        
     })
     // alert("Product Uploaded");
+
 });
 
 function sendData(e){
@@ -120,3 +147,4 @@ function sendData(e){
     // searchResult.innerHtml = 'Food';
     
 }
+
