@@ -35,13 +35,18 @@ exports.view_orders = (req, res) => {
 
 exports.view_orders_details = (req, res) => {
     //make a get request to product api
-    axios.get("http://localhost:3000/api/user/orders")
+    axios.get("http://localhost:3000/api/user/orders", {params: {id: req.query.id}})
         .then(function(response){
-             res.render('users/view_orders', {order: response.data});    
+             res.render('users/view_orders', {order: response.data});   
+            //  console.log(response.data.status)
         })
         .catch(err => {
             res.send(err);
         })
+}
+
+exports.create_order = (req, res) =>{
+    res.render('users/create_order');
 }
 
 exports.adminRoutes = (req, res) => {

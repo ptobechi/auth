@@ -12,7 +12,7 @@ exports.create = (req, res) => {
     const client_email = "tobechipaschal@gmail.com";
     const client_phone = "08147153986";
     const client_address = "Abuja Zone 3";
-    const shop_basket = req.body.items;
+    const shop_basket = req.body.item || req.body.items;
     const prices = req.body.price;
     const total_price = req.body.total_price;
     const delivery_date = req.body.delivery_date;
@@ -57,7 +57,7 @@ exports.find = (req, res) => {
             if(!itemList){
                 res.status(404).send({message: "Order not found"})
             }else{
-                // res.send(itemList);
+                res.send(itemList);
                 console.log(itemList)
             }
         })

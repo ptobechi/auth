@@ -13,7 +13,7 @@
             <!--begin::Page title-->
             <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Add Order</h1>
+                <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Order</h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -31,23 +31,14 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">eCommerce</li>
+                    <li class="breadcrumb-item text-muted">Orders</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
                         <span class="bullet bg-gray-300 w-5px h-2px"></span>
                     </li>
-                    <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Sales</li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item">
-                        <span class="bullet bg-gray-300 w-5px h-2px"></span>
-                    </li>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark">Update Order</li>
+                    <li class="breadcrumb-item text-dark">Order Details</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -62,19 +53,12 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Form-->
-            <form id="edit_order_form" class="form d-flex flex-column flex-lg-row"  >
+            <form class="form d-flex flex-column flex-lg-row"  >
                 <input type="hidden" id="box_id" name="id" value="<%= order._id %> ">
                 <!--begin::Aside column-->
                 <div class="w-100 flex-lg-row-auto w-lg-300px mb-7 me-7 me-lg-10">
                     <!--begin::Order details-->
                     <div class="card card-flush py-4">
-                        <!--begin::Card header-->
-                        <div class="card-header">
-                            <div class="card-title">
-                                <h2>Box Details</h2>
-                            </div>
-                        </div>
-                        <!--end::Card header-->
                         <!--begin::Card body-->
                         <div class="card-body pt-0">
                             <div class="d-flex flex-column gap-10">
@@ -84,7 +68,7 @@
                                     <label class="required form-label">Box Name</label>
                                     <!--end::Label-->
                                     <!--begin::Select2-->
-                                    <input type="text" class="form-control" id="box_name" name="box_name" value="<%= order.box %> ">
+                                    <input type="text" class="form-control" id="box_name" name="box_name" value="<%= order.box_name %> " disabled>
                                     <!--end::Select2-->
                                 </div>
                                 <!--end::Input group-->
@@ -94,7 +78,7 @@
                                     <label class="required form-label">Box Description</label>
                                     <!--end::Label-->
                                     <!--begin::Select2-->
-                                    <input type="text" class="form-control" id="box_description" name="box_description" value="<%= order.description %> " >
+                                    <input type="text" class="form-control" id="box_description" name="box_description" value="<%= order.box_description %> " disabled >
                                     <!--end::Select2-->
                                 </div>
                                 <!--end::Input group-->
@@ -109,51 +93,9 @@
                 <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">
                     <!--begin::Order details-->
                     <div class="card card-flush py-4">
-                        <div class="card-header">
-                            <!--begin::Modal title-->
-                            <h2>Add Items to your Box</h2>
-                            <!--end::Modal title-->
-                        </div>
-                        <!--end::Modal header-->
                         <!--begin::Card body-->
                         <div class="card-body pt-0">
-                            <div class="d-flex flex-column gap-10">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <!--begin::Input group-->
-                                        <div class="fv-row">
-                                            <!--begin::Label-->
-                                            <label class="required form-label">Product</label>
-                                            <!--end::Label-->
-                                            <!--begin::Select2-->
-                                            <input type="text" class="form-control" id="item" >
-                                            <!--end::Select2-->
-                                        </div>
-                                        <!--end::Input group-->
-                                    </div>
-                                    <div class="col-6">
-                                        <!--begin::Input group-->
-                                        <div class="fv-row">
-                                            <!--begin::Label-->
-                                            <label class="required form-label">Price</label>
-                                            <!--end::Label-->
-                                            <!--begin::Select2-->
-                                            <input type="number" class="form-control" id="price" >
-                                            <!--end::Select2-->
-                                        </div>
-                                        <!--end::Input group-->
-                                    </div>
-                                    <!--begin::Input group-->
-                                    <div class="fv-row d-flex justify-content-end mt-2">
-                                        <!--begin::Button-->
-                                        <span id="kt_ecommerce_add_order_submit" class="btn btn-primary">
-                                            Add
-                                        </span>
-                                        <!--end::Button-->
-                                    </div>
-                                    <!--end::Input group-->
-                                </div>
-                                
+                            <div class="d-flex flex-column gap-10">                                
                                 <!--begin::Input group-->
                                 <div>
                                     <!--begin::Selected products-->
@@ -181,7 +123,30 @@
 
                                     <!--begin::Table body-->
                                     <tbody class="fw-bold text-gray-600" id="cart">
-                                       
+                                        <% for(let i=0; i<order.basket.length; i++){ %>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_30">
+                                                        <div class="ms-5">
+                                                            <a class="text-gray-800 text-hover-primary fs-5 fw-bolder"><%= order.basket[i].item %></a>
+                                                            <!-- <input type='hidden' value='${items.item}' name='item[]' /> -->
+                                                            <div class="fw-bold fs-7">Price: &#8358;
+                                                                <span class="item-price" data-kt-ecommerce-edit-order-filter="price"><%= order.basket[i].price %></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-end pe-5" data-order="22">
+                                                Price: &#8358;
+                                                <input type='hidden' value='<%= order.basket[i].item %>' name='item[]' class="box_items" />
+                                                <input type='text' value='<%= order.basket[i].price %>' name='price[]' class="box_items_price" disabled/>
+                                                </td>
+                                            </tr>
+
+                                        <!--begin::Table row-->
+                                        <tr id="total_price_container"></tr>
+                                        <!--end::Table row-->
+                                        <% } %>
 
                                     </tbody>
                                     <!--end::Table body-->
@@ -193,18 +158,6 @@
                     </div>
                     <!--end::Order details-->
                     
-                    <div class="d-flex justify-content-end">
-                        <!--begin::Button-->
-                        <a href="" id="kt_ecommerce_edit_order_cancel" class="btn btn-light me-5">Cancel</a>
-                        <!--end::Button-->
-                        <!--begin::Button-->
-                        <button type="submit" id="kt_ecommerce_edit_order_submit" class="btn btn-primary">
-                            <span class="indicator-label">Save Changes</span>
-                            <span class="indicator-progress">Please wait...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                        <!--end::Button-->
-                    </div>
                 </div>
                 <!--end::Main column-->
             </form>

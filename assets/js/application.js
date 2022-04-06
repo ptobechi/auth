@@ -80,7 +80,7 @@ $("*#box_details").on('click', function(){
                     <div class="d-flex align-items-center me-5">
                         <div class="me-5">
                             <a id="item_name${i}" class="text-gray-800 fw-bolder text-hover-primary fs-6">${items[i].item}</a>
-                            <input type="hidden"  id="list${i}" name="items[]" value="${items[i].item}">
+                            <input type="hidden"  id="list${i}" name="item[]" value="${items[i].item}">
                         </div>
                     </div>
                     <div class="text-gray-400 fw-bolder fs-7 text-end">

@@ -54,6 +54,13 @@ route.get('/update_box', services.update_box)
   route.get('/user/view_order', services.view_orders_details)
 
 
+  /**
+ *  @description for view user orders
+ *  @method GET /update_box
+ */
+   route.get('/user/create_shoppinglist', services.create_order)
+
+
 // Product API
 route.post('/getProducts', controller.getProduct);
 route.post('/api/upload/product', controller.upload);
