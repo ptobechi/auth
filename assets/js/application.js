@@ -102,6 +102,9 @@ $("*#box_details").on('click', function(){
         }
         
         $("#total_sum").text(response.total_sum);
+        document.getElementById("total_sum_input").value = response.total_sum
+        document.getElementById("box_name").value = response.box
+        document.getElementById("box_description").value = response.description
         
     })
     // alert("Product Uploaded");

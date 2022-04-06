@@ -9,6 +9,7 @@ function removeItem(id){
 
     let sum = total_price - itemprice;
     updated_price.textContent = sum;
+    document.getElementById("total_sum_input").value = sum;
     console.log(sum)
 
     list.disabled = "true"

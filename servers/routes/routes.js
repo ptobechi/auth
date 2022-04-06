@@ -3,6 +3,7 @@ const route = express.Router()
 
 const services = require('../services/render/render');
 const controller = require('../controllers/product');
+const order = require('../controllers/order');
 
 /**
  *  @description Root Route
@@ -40,14 +41,31 @@ route.get('/create_box', services.create_box)
  */
 route.get('/update_box', services.update_box)
 
+/**
+ *  @description for view user orders
+ *  @method GET /update_box
+ */
+ route.get('/orders', services.view_orders)
 
-// API
+ /**
+ *  @description for view user orders
+ *  @method GET /update_box
+ */
+  route.get('/user/view_order', services.view_orders_details)
+
+
+// Product API
 route.post('/getProducts', controller.getProduct);
 route.post('/api/upload/product', controller.upload);
 route.post('/api/product', controller.create);
 route.get('/api/product', controller.find);
 route.put('/api/product/:id', controller.update);
 route.delete('/api/product/:id', controller.delete);
+
+
+//Orders API
+route.post('/api/user/place_order', order.create)
+route.get('/api/user/orders', order.find)
 
 
 module.exports = route

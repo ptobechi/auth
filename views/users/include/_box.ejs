@@ -48,7 +48,7 @@
 							</div>
 							<!--end::Nav-->
 							<!--begin::Form-->
-							<form class="mx-auto mw-500px w-100 pt-15 pb-10" novalidate="novalidate" id="kt_modal_offer_a_deal_form">
+							<form class="mx-auto mw-500px w-100 pt-15 pb-10" action="/api/user/place_order" method="POST" novalidate="novalidate" id="kt_modal_offer_a_deal_form">
 								<!--begin::Type-->
 								<div class="current" data-kt-stepper-element="content">
 									<!--begin::Wrapper-->
@@ -59,7 +59,7 @@
 											<% for(var i=0; i<products.length; i++){ %>
 											<label class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6 mb-6">
 												<!--begin::Input-->
-												<input class="btn-check" id="box_details" data-kt-element="type-next" type="radio" name="offer_type" value="<%= products[i]._id %>" data-id="<%= products[i]._id %>"/>
+												<input class="btn-check" id="box_details" data-kt-element="type-next" type="radio" name="box_id" value="<%= products[i]._id %>" data-id="<%= products[i]._id %>"/>
 												<!--end::Input-->
 												<!--begin::Label-->
 												<span class="d-flex">
@@ -93,6 +93,10 @@
 
 										<!--begin::Wrapper-->
 										<div class="text-gray-400 fw-bolder fs-7 text-end">
+											<input type="hidden" name="total_price" id="total_sum_input" >
+											<input type="hidden" name="box_name" id="box_name">
+											<input type="hidden" name="box_description" id="box_description">
+
 											<span class="text-gray-800 fw-bolder fs-6 d-block">&#8358; <span id="total_sum">0.00</span></span>
 										</div>
 										<!--end::Wrapper-->
@@ -123,7 +127,7 @@
 											</label>
 											<!--end::Label-->
 											<!--begin::Dialer-->
-											<div class="position-relative w-lg-250px" id="kt_modal_finance_setup" data-kt-dialer="true" data-kt-dialer-min="50" data-kt-dialer-max="50000" data-kt-dialer-step="100" data-kt-dialer-prefix="$" data-kt-dialer-decimals="2">	
+											<div class="position-relative w-lg-250px" >	
 												<!--begin::Input control-->
 												<input type="date" class="form-control form-control-solid border-0 ps-12" name="delivery_date"  />
 												<!--end::Input control-->
@@ -164,7 +168,7 @@
 										<!--begin::Actions-->
 										<div class="d-flex flex-stack">
 											<button type="button" class="btn btn-lg btn-light me-3" data-kt-element="finance-previous">Back</button>
-											<button type="button" class="btn btn-lg btn-primary" data-kt-element="finance-next">
+											<button type="submit" class="btn btn-lg btn-primary" data-kt-element="finance-next">
 												<span class="indicator-label">Place Order</span>
 												<span class="indicator-progress">Please wait...
 												<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

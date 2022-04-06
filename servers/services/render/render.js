@@ -22,6 +22,28 @@ exports.userRoutes = (req, res) => {
         })
 }
 
+exports.view_orders = (req, res) => {
+    //make a get request to product api
+    axios.get("http://localhost:3000/api/user/orders")
+        .then(function(response){
+             res.render('users/orders', {orders: response.data});    
+        })
+        .catch(err => {
+            res.send(err);
+        })
+}
+
+exports.view_orders_details = (req, res) => {
+    //make a get request to product api
+    axios.get("http://localhost:3000/api/user/orders")
+        .then(function(response){
+             res.render('users/view_orders', {order: response.data});    
+        })
+        .catch(err => {
+            res.send(err);
+        })
+}
+
 exports.adminRoutes = (req, res) => {
     axios.get("http://localhost:3000/api/product")
         .then(function(response){
