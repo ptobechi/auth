@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 
-const notificationSchema = new mongoose.Schema({
-    email:{
+const todoListSchema = new mongoose.Schema({
+    client_email:{
         type: String,
         required: true
     },
@@ -24,4 +24,4 @@ const notificationSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model("Notifications", notificationSchema);
+module.exports = mongoose.model("TodoList", todoListSchema);

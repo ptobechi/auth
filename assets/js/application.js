@@ -98,7 +98,6 @@ $("*#box_details").on('click', function(){
             const cart = document.getElementById("items_container");
             const total = document.getElementById("items_list");
             cart.insertBefore(itemBox, total);
-
         }
         
         $("#total_sum").text(response.total_sum);
